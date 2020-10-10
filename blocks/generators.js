@@ -3,6 +3,6 @@ Blockly.Python['paj7620_is_gesture'] = function (block) {
 
   var dropdown_gesture = block.getFieldValue('gesture');
 
-  var code = `PAJ7620.isGesture(${dropdown_gesture})`;
+  var code = `PAJ7620.isGesture(PAJ7620.${dropdown_gesture})`;
   return [code, Blockly.Python.ORDER_NONE];
 };
