@@ -1,6 +1,7 @@
 from machine import Pin
 from machine import I2C
 from time import sleep
+import os
 
 WAVE = 1 << 8
 COUNTER_CLOCKWISE = 1 << 7
@@ -14,7 +15,11 @@ UP = 1 << 0
 
 PAJ7620_ADDR = 0x73
 
-i2c1 = I2C(1, scl=Pin(5), sda=Pin(4), freq=100000)
+machine = os.uname().machine
+if "KidBright32" in machine:
+    i2c1 = I2C(1, scl=Pin(5), sda=Pin(4), freq=100000)
+else:
+    i2c1 = I2C(0, scl=Pin(22), sda=Pin(21), freq=100000)
 
 def setup():
     init = [ (0xEF, b'\x01'), (0x72, b'\x01'), (0xEF, b'\x00') ]
